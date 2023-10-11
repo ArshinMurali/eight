@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block title %}
+        {% if category %}
+        {{ product.name }} - Mettalica store
+        {% endif %}
+    {% endblock %}
+    {% block content %}
+    <div class="row my_prod">
+        <div class="mx-auto">
+            <a href="{% url 'cartapp:Allpc' %}">All products</a>|<a href="{{product.category}}"></a>|<a>{{product.name}}</a>
+        </div>
+    </div>
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-md-12 col-lg-6 text-center">
+                <img src="{{product.img.url}}" alt="{{ product.name }}" width="250px height=250px">
+            </div>
+
+
+        
+        <div class="col-md-12 col-sm-12 col-md-12 col-lg-6">
+            <h1>{{product.name}}</h1>
+            <p>{{product.price}}</p>
+            <p class="prod_title">Product description</p>
+            <p class=" text-justify prod_desc">{{product.desc}}</p>
+            {% if product.stock <= 0 %}
+            <p><b>Out of stock</b></p>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'addcart:adding_cart' product.id %}">Add to cart</a>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+{% endblock %}
